@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+</head>
+<body>
+<h2>Login Form</h2>
+<form onsubmit="return checkLogin();">
+  <label for="username">Username:</label>
+  <input type="text" id="username" required><br><br>
+  <label for="password">Password:</label>
+  <input type="password" id="password" required><br><br>
+  <button type="submit">Login</button>
+</form>
+<script>
+  function checkLogin() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+
+    if (username === 'Admin') {
+      if (password === 'Admin@123') {
+        alert('Login success');
+      } else {
+        alert('Incorrect username or password');
+      }
+    } else {
+      alert('Incorrect username or password');
+    }
+    return false;
+  }
+</script>
+</body>
+</html>
