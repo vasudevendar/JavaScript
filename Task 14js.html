@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timestamps</title>
+</head>
+<body>
+  <h2>Timestamp Examples</h2>
+  
+  <!-- Display Timestamps -->
+  <div>
+    <p><strong>Date (dd/mm/yyyy):</strong> <span id="date"></span></p>
+    <p><strong>Time (hh.mm.ss):</strong> <span id="time"></span></p>
+    <p><strong>Relative time:</strong> <span id="relativeTime"></span></p>
+  </div>
+
+  <script>
+    // Function to add leading zero to single digit values
+    function addZero(value) {
+      return value < 10 ? '0' + value : value;
+    }
+
+    // 1. Get the current date and format as dd/mm/yyyy
+    function getFormattedDate() {
+      const today = new Date();
+      const day = addZero(today.getDate());
+      const month = addZero(today.getMonth() + 1); // Months are 0-indexed
+      const year = today.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+
+    // 2. Get the current time and format as hh.mm.ss
+    function getFormattedTime() {
+      const now = new Date();
+      const hours = addZero(now.getHours());
+      const minutes = addZero(now.getMinutes());
+      const seconds = addZero(now.getSeconds());
+      return `${hours}.${minutes}.${seconds}`;
+    }
+
+    // 3. Get relative time (e.g., "1 min ago", "2 months ago")
+    function getRelativeTime(pastDate) {
+      const now = new Date();
+      const diffMs = now - pastDate; // Difference in milliseconds
+      const diffSec = Math.floor(diffMs / 1000);
+      const diffMin = Math.floor(diffSec / 60);
+      const diffHours = Math.floor(diffMin / 60);
+      const diffDays = Math.floor(diffHours / 24);
+      const diffMonths = Math.floor(diffDays / 30);
+      const diffYears = Math.floor(diffMonths / 12);
+
+      if (diffSec < 60) return `${diffSec} seconds ago`;
+      if (diffMin < 60) return `${diffMin} minutes ago`;
+      if (diffHours < 24) return `${diffHours} hours ago`;
+      if (diffDays < 30) return `${diffDays} days ago`;
+      if (diffMonths < 12) return `${diffMonths} months ago`;
+      return `${diffYears} years ago`;
+    }
+
+    // Example: A post made 2 hours ago
+    const pastDate = new Date(); 
+    pastDate.setHours(pastDate.getHours() - 2); // For demo, post was made 2 hours ago
+
+    // Display the timestamps
+    document.getElementById('date').innerText = getFormattedDate();
+    document.getElementById('time').innerText = getFormattedTime();
+    document.getElementById('relativeTime').innerText = getRelativeTime(pastDate);
+
+    // Optionally, update the time and relative time in real-time
+    setInterval(() => {
+      document.getElementById('time').innerText = getFormattedTime();
+      document.getElementById('relativeTime').innerText = getRelativeTime(pastDate);
+    }, 1000);
+  </script>
+</body>
+</html>
+  

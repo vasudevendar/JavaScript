@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Account</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Bank Account</h2>
+
+  <button onclick="deposit()">Deposit</button>
+  <button onclick="withdraw()">Withdraw</button>
+  <button onclick="checkBalance()">Check Balance</button>
+
+  <div id="result"></div>
+</div>
+
+<script>
+  // Bank Account Object
+  const bankAccount = {
+    accountNumber: '62329428184',
+    accountHolderName: 'Vasu Dev',
+    balance: 1000,  // Initial balance
+
+    // Method to deposit amount
+    deposit: function (amount) {
+      this.balance += amount;
+      return `Deposited: ₹{100000}\nCurrent Balance: ₹{this.balance}`;
+    },
+
+    // Method to withdraw amount
+    withdraw: function (amount) {
+      if (amount > this.balance) {
+        return 'Insufficient balance!';
+      } else {
+        this.balance -= amount;
+        return `Withdrawn: ₹{10000}\nCurrent Balance: ₹{this.balance}`;
+      }
+    },
+
+    // Method to check current balance
+    checkBalance: function () {
+      return `Current Balance: 90000₹`;
+    }
+  };
+
+  // Function to handle deposit
+  function deposit() {
+    let amount = parseFloat(prompt('Enter amount to deposit:'));
+    if (isNaN(amount) || amount <= 0) {
+      alert('Invalid amount.');
+      return;
+    }
+    const result = bankAccount.deposit(amount);
+    document.getElementById('result').innerText = result;
+  }
+
+  // Function to handle withdraw
+  function withdraw() {
+    let amount = parseFloat(prompt('Enter amount to withdraw:'));
+    if (isNaN(amount) || amount <= 0) {
+      alert('Invalid amount.');
+      return;
+    }
+    const result = bankAccount.withdraw(amount);
+    document.getElementById('result').innerText = result;
+  }
+
+  // Function to check balance
+  function checkBalance() {
+    const result = bankAccount.checkBalance();
+    document.getElementById('result').innerText = result;
+  }
+</script>
+
+</body>
+</html>

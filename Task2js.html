@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Calculate Salary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #555;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <form onsubmit="return calculateSalary();">
+    <h2>Calculate Salary</h2>
+    <label for="deductions">Deductions:</label>
+    <input type="number" id="deductions" required><br><br>
+    <button type="submit">Calculate Salary</button>
+    <div class="error-message" id="errorMessage"></div>
+  </form>
+
+  <script>
+    function calculateSalary() {
+      const fixedSalary = 25000; // Fixed salary amount
+      const deductions = parseFloat(document.getElementById('deductions').value);
+
+      if (isNaN(deductions)) {
+        alert('Please enter a valid number for deductions.');
+        return false;
+      }
+
+      const netSalary = fixedSalary - deductions;
+      alert('Net Salary: ' + netSalary);
+
+      // Prevent form submission
+      return false;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input {
+      padding: 5px;
+      margin: 5px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Loan Application Form</h2>
+
+  <label for="income">Monthly Income:</label>
+  <input type="number" id="income" required><br><br>
+
+  <label for="balance">Account Balance:</label>
+  <input type="number" id="balance" required><br><br>
+
+  <label for="loanAmount">Loan Amount:</label>
+  <input type="number" id="loanAmount" required><br><br>
+
+  <button onclick="applyLoan()">Apply for Loan</button>
+
+  <div id="result"></div>
+
+  <script>
+    // Loan object constructor
+    function Loan(loanAmount, interestRate, loanTerm) {
+      this.loanAmount = loanAmount;
+      this.interestRate = interestRate;
+      this.loanTerm = loanTerm;
+      this.calculateMonthlyPayment = function() {
+        const monthlyInterestRate = this.interestRate / 12 / 100;
+        const numberOfPayments = this.loanTerm * 12;
+        return (this.loanAmount * monthlyInterestRate) / 
+               (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+      };
+    }
+
+    // LoanManager object
+    const LoanManager = {
+      loans: [],
+
+      applyLoan: function(monthlyIncome, accountBalance, loanAmount) {
+        const eligibilityCriteria = monthlyIncome >= 30000 && accountBalance >= 10000;
+
+        if (eligibilityCriteria) {
+          const newLoan = new Loan(loanAmount, 5, 5); // Example interest rate and loan term
+          this.loans.push(newLoan);
+          return 'Loan Approved';
+        } else {
+          return 'Loan Rejected';
+        }
+      },
+
+      checkLoans: function() {
+        return this.loans.map((loan, index) => {
+          return `Loan ${index + 1}: Amount: ${loan.loanAmount}, Monthly Payment: ${loan.calculateMonthlyPayment().toFixed(2)}`;
+        }).join('\n');
+      }
+    };
+
+    function applyLoan() {
+      const income = parseFloat(document.getElementById('income').value);
+      const balance = parseFloat(document.getElementById('balance').value);
+      const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+
+      const resultMessage = LoanManager.applyLoan(income, balance, loanAmount);
+      document.getElementById('result').textContent = resultMessage;
+
+      if (resultMessage === 'Loan Approved') {
+        alert(LoanManager.checkLoans());
+      }
+    }
+  </script>
+
+</body>
+</html>

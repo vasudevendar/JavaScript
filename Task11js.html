@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remove Duplicates from Array</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input {
+      padding: 5px;
+      margin: 5px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Remove Duplicates from an Array</h2>
+
+  <label for="arrayInput">Enter array elements (comma separated):</label><br>
+  <input type="text" id="arrayInput" placeholder="e.g. 5, 3, 8, 3, 2, 5"><br><br>
+
+  <button onclick="removeDuplicates()">Remove Duplicates</button>
+
+  <div id="result"></div>
+
+  <script>
+    function removeDuplicates() {
+       const input = document.getElementById('arrayInput').value;
+      const array = input.split(',').map(Number); // Convert input string to an array of numbers
+
+      if (array.some(isNaN)) {
+        alert('Please enter valid numbers separated by commas.');
+        return;
+      }
+
+      const uniqueArray = [...new Set(array)]; // Remove duplicates using Set
+
+      document.getElementById('result').textContent = "Unique Elements: " + uniqueArray.join(', ');
+    }
+  </script>
+
+</body>
+</html>

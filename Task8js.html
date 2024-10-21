@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reverse Fibonacci Series</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input {
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Fibonacci Series in Reverse Order</h2>
+  <label for="count">Enter the number of terms:</label>
+  <input type="number" id="count" min="1" required><br><br>
+  <button onclick="displayFibonacci()">Generate Fibonacci</button>
+  
+  <div id="result"></div>
+
+  <script>
+    function displayFibonacci() {
+      const count = parseInt(document.getElementById('count').value);
+      const result = document.getElementById('result');
+      result.innerHTML = '';
+
+      if (isNaN(count) || count <= 0) {
+        result.textContent = "Please enter a valid positive number.";
+        return;
+      }
+
+      // Generate Fibonacci series
+      let fibSeries = [0, 1];
+      for (let i = 2; i < count; i++) {
+        fibSeries.push(fibSeries[i - 1] + fibSeries[i - 2]);
+      }
+
+      // Slice the series to get only the required number of terms
+      fibSeries = fibSeries.slice(0, count);
+
+      // Display Fibonacci series in reverse order
+      const reversedFibSeries = fibSeries.reverse();
+      result.innerHTML = `<strong>Reverse Fibonacci Series:</strong> ${reversedFibSeries.join(', ')}`;
+    }
+  </script>
+
+</body>
+</html>

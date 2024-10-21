@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input {
+      padding: 5px;
+      margin: 5px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Simple Calculator</h2>
+
+  <label for="num1">Enter first number:</label>
+  <input type="number" id="num1" required><br><br>
+
+  <label for="num2">Enter second number:</label>
+  <input type="number" id="num2" required><br><br>
+
+  <button onclick="performOperation('add')">Addition</button>
+  <button onclick="performOperation('subtract')">Subtraction</button>
+  <button onclick="performOperation('multiply')">Multiplication</button>
+  <button onclick="performOperation('divide')">Division</button>
+  <button onclick="performOperation('modulus')">Modulus</button>
+
+  <div id="result"></div>
+
+  <script>
+    function performOperation(operation) {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        alert("Please enter valid numbers");
+        return;
+      }
+
+      let result;
+
+      switch (operation) {
+        case 'add':
+          result = add(num1, num2);
+          break;
+        case 'subtract':
+          result = subtract(num1, num2);
+          break;
+        case 'multiply':
+          result = multiply(num1, num2);
+          break;
+        case 'divide':
+          result = divide(num1, num2);
+          break;
+        case 'modulus':
+          result = modulus(num1, num2);
+          break;
+        default:
+          result = "Unknown operation";
+      }
+
+      document.getElementById('result').textContent = "Result: " + result;
+    }
+
+    // Addition
+    function add(a, b) {
+      return a + b;
+    }
+
+    // Subtraction
+    function subtract(a, b) {
+      return a - b;
+    }
+
+    // Multiplication
+    function multiply(a, b) {
+      return a * b;
+    }
+
+    // Division
+    function divide(a, b) {
+      if (b === 0) {
+        return "Cannot divide by zero!";
+      }
+      return a / b;
+    }
+
+    // Modulus
+    function modulus(a, b) {
+      if (b === 0) {
+        return "Cannot perform modulus operation with zero!";
+      }
+      return a % b;
+    }
+  </script>
+</body>
+</html>

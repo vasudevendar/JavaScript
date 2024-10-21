@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Translation Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .container {
+      margin: 20px;
+    }
+    select {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .translated-text {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Google Translation Example</h2>
+    <label for="languageSelect">Choose a language:</label>
+    <select id="languageSelect" onchange="translateText()">
+      <option value="english">English</option>
+      <option value="hindi">Hindi</option>
+      <option value="french">French</option>
+      <option value="telugu">Telugu</option>
+      <option value="dutch">Dutch</option>
+    </select>
+    
+    <div class="translated-text" id="translatedText">
+      Hi, welcome to Google Translation
+    </div>
+  </div>
+
+  <script>
+    function translateText() {
+      const languageSelect = document.getElementById("languageSelect").value;
+      const translatedText = document.getElementById("translatedText");
+
+      switch (languageSelect) {
+        case "english":
+          translatedText.innerText = "Hi, welcome to Google Translation";
+          break;
+        case "hindi":
+          translatedText.innerText = "नमस्ते, गूगल अनुवाद में आपका स्वागत है";
+          break;
+        case "french":
+          translatedText.innerText = "Salut, bienvenue à Google Traduction";
+          break;
+        case "telugu":
+          translatedText.innerText = "హలో, గూగుల్ అనువాదానికి స్వాగతం";
+          break;
+        case "dutch":
+          translatedText.innerText = "Hallo, welkom bij Google Vertaling";
+          break;
+        default:
+          translatedText.innerText = "Hi, welcome to Google Translation";
+      }
+    }
+  </script>
+
+</body>
+</html>
